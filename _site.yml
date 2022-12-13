@@ -1,0 +1,7 @@
+name: "yiyang-website"
+output_doc: "."
+navbar:
+  title: "Yiyang's website"
+left:
+  - text: "Home"
+href: index.html
