@@ -247,7 +247,9 @@ correlation of errors (13).
 
 ## Tables and Figures
 
-![Scoring methods for plant-based diet indices](%22img/fig1.jpg%22)
+![Scoring methods for plant-based diet indices](img/fig1.jpg)
+
+**Figure 1**.Scoring methods for plant-based diet indices
 
 *+means higher intakes receive higher scores; - means higher intakes
 receive lower scores*  
@@ -258,10 +260,54 @@ potatoes, sugar-sweetened beverage, sweets and desserts*
 *3. Animal Food Group (n=6): animal fat, dairy, egg, fish or seafood,
 meat (red, processed meat, poultry), miscellaneous animal-based foods*
 
+![Illustration of simulated main and validation study](img/fig2.jpg)
+
+**Figure 2**. Illustration of simulated main and validation study
+
+![Spearman correlation matrix between plant-based diet indices and their
+scoring components, using the
+FFQ2](final-project_git_files/figure-gfm/unnamed-chunk-3-1.png) **Figure
+3**. Spearman correlation matrix between plant-based diet indices and
+their scoring components, using the FFQ2
+
+![Scatter plots with calibration coeffients of estimates from the
+average of the two dietary records against FFQ 2
+estimates](final-project_git_files/figure-gfm/figure4-plot-1.png)
+
+**Figure 4**. Scatter plots with calibration coeffients of estimates
+from the average of the two dietary records against FFQ 2 estimates *A:
+Plots for three plant-based diet indices*  
+*B: Plots for scoring components of plant-based diet*
+
+![Percentage of bias in estimated OR before correcting for measurement
+error](final-project_git_files/figure-gfm/figure5-plot-1.png)
+
+**Figure 5**.Percentage of bias in estimated OR before correcting for
+measurement error
+
+![RMSE in beta estimates before and after correcting for measurement
+error](final-project_git_files/figure-gfm/figure6-plot-1.png)
+
+**Figure 7**.RMSE in beta estimates before and after correcting for
+measurement error
+
+![Coverage probability of beta estimates before and after correcting for
+measurement
+error](final-project_git_files/figure-gfm/figure7-plot-1.png) **Figure
+7**.Coverage probability of beta estimates before and after correcting
+for measurement error
+
+![Percentage of bias in estimated OR before and after correcting for
+measurement
+error](final-project_git_files/figure-gfm/figure8-plot-1.png)
+
+**Figure 8**.Percentage of bias in estimated OR before and after
+correcting for measurement error
+
 <table>
 <caption>
-Summary statistics of the dietary exposures derived from FFQs and
-dietary records
+Table1. Summary statistics of the dietary exposures derived from FFQs
+and dietary records
 </caption>
 <thead>
 <tr>
@@ -501,16 +547,9 @@ DR_wk2
 </tr>
 </tbody>
 </table>
-![Illustration of simulated main and validation
-study](%22img/fig2.jpg%22)
-
-![Spearman correlation matrix between plant-based diet indices and their
-scoring components, using the
-FFQ2](final-project_git_files/figure-gfm/unnamed-chunk-2-1.png)
-
 <table class="table table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-reproducibility and validity results
+Table2. Reproducibility and validity results
 </caption>
 <thead>
 <tr>
@@ -629,27 +668,6 @@ animal
 </tr>
 </tbody>
 </table>
-![Scatter plots with calibration coeffients of estimates from the
-average of the two dietary records against FFQ 2
-estimates](final-project_git_files/figure-gfm/figure4-plot-1.png)
-
-*A: Plots for three plant-based diet indices*  
-*B: Plots for scoring components of plant-based diet*
-
-![Percentage of bias in estimated OR before correcting for measurement
-error](final-project_git_files/figure-gfm/figure5-plot-1.png)
-
-![MSE in beta estimates before and after correcting for measurement
-error](final-project_git_files/figure-gfm/figure6-plot-1.png)
-
-![Coverage probability of beta estimates before and after correcting for
-measurement
-error](final-project_git_files/figure-gfm/figure7-plot-1.png)
-
-![Percentage of bias in estimated OR before and after correcting for
-measurement
-error](final-project_git_files/figure-gfm/figure8-plot-1.png)
-
 ## Analysis Code
 
 ``` r
