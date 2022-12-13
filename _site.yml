@@ -1,7 +1,9 @@
-name: "yiyang-website"
-output_doc: "."
+name: "yiyang's website"
+output_dir: "."
 navbar:
-  title: "Yiyang's website"
-left:
-  - text: "Home"
-href: index.html
+  title: "Yiyang's website for BST 260 final project"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Des"
+      href: tabs/text.html

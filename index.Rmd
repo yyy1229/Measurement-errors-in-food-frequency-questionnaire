@@ -1,5 +1,5 @@
 ---
-title: "My cats have a website!"
+title: "BST 260's final project"
 ---
 
-This is John.
+This is yiyang's final project on meaurement errors in FFQ estimates
