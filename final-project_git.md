@@ -60,7 +60,7 @@ applied the linear approximation to correct the measurement errors (11)
 FFQ-derived exposures with error (Z) and outcome status (D) were
 collected. Then, would sample an internal validation (n=500) from the
 main study where the exposure estimates from FFQ (Z) and dietary records
-(X) were collected (**Figure 2 **). We assumed FFQ estimates with
+(X) were collected (**Figure 2** ). We assumed FFQ estimates with
 within-person errors: $Z=\lambda X+ \alpha + \epsilon_r$, where
 $\epsilon_r \sim N (0, \sigma)$. The exposure-diseases associations
 would be represented by a logistic model:
@@ -266,9 +266,10 @@ meat (red, processed meat, poultry), miscellaneous animal-based foods*
 
 ![Spearman correlation matrix between plant-based diet indices and their
 scoring components, using the
-FFQ2](final-project_git_files/figure-gfm/unnamed-chunk-3-1.png) **Figure
-3**. Spearman correlation matrix between plant-based diet indices and
-their scoring components, using the FFQ2
+FFQ2](final-project_git_files/figure-gfm/unnamed-chunk-3-1.png)
+
+**Figure 3**. Spearman correlation matrix between plant-based diet
+indices and their scoring components, using the FFQ2
 
 ![Scatter plots with calibration coeffients of estimates from the
 average of the two dietary records against FFQ 2
@@ -293,9 +294,10 @@ measurement error
 
 ![Coverage probability of beta estimates before and after correcting for
 measurement
-error](final-project_git_files/figure-gfm/figure7-plot-1.png) **Figure
-7**.Coverage probability of beta estimates before and after correcting
-for measurement error
+error](final-project_git_files/figure-gfm/figure7-plot-1.png)
+
+**Figure 7**.Coverage probability of beta estimates before and after
+correcting for measurement error
 
 ![Percentage of bias in estimated OR before and after correcting for
 measurement
