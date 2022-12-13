@@ -589,14 +589,13 @@ Plots for three plant-based diet indices*\
 fig5
 ```
 
-**Figure 5**.Percentage of bias in estimated OR before correcting for
-measurement error \newpage
+**Figure 5**.Percentage of bias in estimated OR before correcting for measurement error \newpage
 
 ```{r figure6-plot, echo=FALSE, fig.cap = "RMSE in beta estimates before and after correcting for measurement error"}
 fig6
 ```
 
-**Figure 7**.RMSE in beta estimates before and after correcting for
+**Figure 6**.RMSE in beta estimates before and after correcting for
 measurement error
 
 \newpage
@@ -612,8 +611,7 @@ correcting for measurement error \newpage
 fig8
 ```
 
-**Figure 8**.Percentage of bias in estimated OR before and after
-correcting for measurement error
+**Figure 8**.Percentage of bias in estimated OR before and after correcting for measurement error
 
 \newpage
 
@@ -626,7 +624,10 @@ tab1 %>%
     booktabs = TRUE,
     longtable = TRUE,
     linesep = "",
-    )
+    )%>% kable_styling(c("bordered","condensed"),
+                latex_options = c("hold_position"), 
+                font_size = 11,
+                full_width = F)
 ```
 
 \newpage

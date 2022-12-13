@@ -1,0 +1,57 @@
+---
+title: "Reference"
+
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(fig.width=20, fig.height=16)
+```
+
+1.  Willett W. Nutritional epidemiology: Oxford University Press, 2012.
+2.  Satija A, Hu FB. Plant-based diets and cardiovascular health. Trends
+    Cardiovasc Med 2018;28(7):437-41. doi: 10.1016/j.tcm.2018.02.004.
+3.  Colditz GA, Manson JE, Hankinson SE. The Nurses' Health Study:
+    20-year contribution to the understanding of health among women. J
+    Womens Health 1997;6(1):49-62. doi: 10.1089/jwh.1997.6.49.
+4.  Cho E, Chen WY, Hunter DJ, Stampfer MJ, Colditz GA, Hankinson SE,
+    Willett WC. Red meat intake and risk of breast cancer among
+    premenopausal women. Archives of internal medicine
+    2006;166(20):2253-9. doi: 10.1001/archinte.166.20.2253.
+5.  Koo TK, Li MY. A Guideline of Selecting and Reporting Intraclass
+    Correlation Coefficients for Reliability Research. J Chiropr Med
+    2016;15(2):155-63. doi: 10.1016/j.jcm.2016.02.012.
+6.  Rosner B, Glynn RJ. Interval estimation for rank correlation
+    coefficients based on the probit transformation with extension to
+    measurement error correction of correlated ranked data. Statistics
+    in medicine 2007;26(3):633-46. doi: 10.1002/sim.2547.
+7.  Perisic I, Rosner B. Comparisons of measures of interclass
+    correlations: the general case of unequal group size. Statistics in
+    medicine 1999;18(12):1451-66. doi:
+    10.1002/(sici)1097-0258(19990630)18:12\<1451::aid-sim142\>3.0.co;2-k.
+8.  Bingham SA, Gill C, Welch A, Cassidy A, Runswick SA, Oakes S, Lubin
+    R, Thurnham DI, Key T, Roe L. Validation of dietary assessment
+    methods in the UK arm of EPIC using weighed records, and 24-hour
+    urinary nitrogen and potassium and serum vitamin C and carotenoids
+    as biomarkers. International journal of epidemiology
+    1997;26(suppl_1):S137.
+9.  Rosner B, Spiegelman D, Willett W. Correction of logistic regression
+    relative risk estimates and confidence intervals for measurement
+    error: the case of multiple covariates measured with error. American
+    journal of epidemiology 1990;132(4):734-45.
+10. Kaaks R, Riboli E, Van Staveren W. Calibration of dietary intake
+    measurements in prospective cohort studies. American journal of
+    epidemiology 1995;142(5):548-56.
+11. Rosner B, Willett WC, Spiegelman D. Correction of logistic
+    regression relative risk estimates and confidence intervals for
+    systematic within-person measurement error. Stat Med
+    1989;8(9):1051-69; discussion 71-3. doi: 10.1002/sim.4780080905.
+12. Rosner B, Willett WC. Interval estimates for correlation
+    coefficients corrected for within-person variation: implications for
+    study design and hypothesis testing. Am J Epidemiol
+    1988;127(2):377-86. doi: 10.1093/oxfordjournals.aje.a114811.
+13. Spiegelman D, McDermott A, Rosner B. Regression calibration method
+    for correcting measurement-error bias in nutritional epidemiology.
+    The American journal of clinical nutrition 1997;65(4
+    Suppl):1179S-86S. doi: 10.1093/ajcn/65.4.1179S. \newpage

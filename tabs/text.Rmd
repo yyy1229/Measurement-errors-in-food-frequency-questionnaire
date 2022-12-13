@@ -1,6 +1,9 @@
 ---
-title: "BST260 final project"
-
+title: "Report"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
 ---
 
 ```{r setup, include=FALSE}

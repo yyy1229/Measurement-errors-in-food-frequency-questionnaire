@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Yiyang Yue" />
+
+<meta name="date" content="2022-12-12" />
+
+<title>BST260 final project</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Yiyang's website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="tabs/text.html">Text report</a>
+</li>
+<li>
+  <a href="tabs/refer.html">References</a>
+</li>
+<li>
+  <a href="tabs/tab_fig.html">Tables and Figures</a>
+</li>
+<li>
+  <a href="tabs/code.html">Analysis codes</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:yyue@hsph.harvard.edu">
+    <span class="fa fa-envelope-o"></span>
+     
+    Contact me
+  </a>
+</li>
+<li>
+  <a href="https://github.com/yyy1229">
+    <span class="fa fa-envelope-o"></span>
+     
+    GitHub
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">BST260 final project</h1>
+<h4 class="author">Yiyang Yue</h4>
+<h4 class="date">2022-12-12</h4>
+
+</div>
+
+
+<div style="page-break-after: always;"></div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Nowadays, food frequency questionnaires (FFQs) have been the primary
+method of dietary assessment in large cohort studies of diet and health
+outcomes, because they can be self-administered, efficiently processed,
+and provide data on individual intakes of both foods and nutrients over
+an extended period (1). However, FFQ estimates rely on memory and hence
+prone to recall bias. Other sources of error in FFQ estimates include
+misinterpretation about portion size, omitting food, and so on.
+Therefore, it is is critical to document the validity of FFQ estimates
+(nutrients, foods, and dietary scores) and quantify the impact of these
+measurement errors in the diet and disease associations.</p>
+<p>In this project, we first evaluated the reproducibility and validity
+of a FFQ in measuring three dietary scores: overall plant-based diet
+indices (PDI), healthful plant-based diet index (hPDI), and unhealthful
+plant-based diet index (uPDI) and their scoring components: healthful
+plant foods (hplant), unhealthful plant foods (uplant), total plant
+foods (tplant), and animal foods (animal) (2). The scoring methods of
+these plant-based indices were shown in the <strong>Figure 1</strong>.
+This analysis included 742 participants from the Women’s Lifestyle
+Validation Studies (3, 4). Participants completed a 152-item FFQ at the
+beginning of the study (FFQ1) and one year later (FFQ2) and completed
+two weighed 7-day dietary records (DR_wk1 and DR_wk2) six-month apart
+between FFQ assessments (<strong>Table 1</strong>). The reproducibility
+of the FFQs was evaluated by rank intraclass correlation coefficients
+(ICC) with two repeated FFQ assessments (5). The validity was assessed
+by comparing FFQ2-derived DQSs to those from the average of two 7DDRs
+(DR_avg) using Spearman rank correlation coefficients (rs), because we
+are more interested in ranking the population correctly (6, 7).
+Calibration coefficients were obtained as slopes from linear regression
+models with FFQ estimates as independent (predictor) variables and
+estimates from the average of the two 7DDRs as dependent (outcome)
+variables (8-10).</p>
+<p>We also conducted a simulation analysis to assess the effect of
+measurement error in FFQ estimates on diseases risk estimation and
+applied the linear approximation to correct the measurement errors (11)
+. We would simulate a main study with 5,000 participants where
+FFQ-derived exposures with error (Z) and outcome status (D) were
+collected. Then, would sample an internal validation (n=500) from the
+main study where the exposure estimates from FFQ (Z) and dietary records
+(X) were collected (<strong>Figure 2</strong> ). We assumed FFQ
+estimates with within-person errors: <span
+class="math inline">\(Z=\lambda X+ \alpha + \epsilon_r\)</span>, where
+<span class="math inline">\(\epsilon_r \sim N (0, \sigma)\)</span>. The
+exposure-diseases associations would be represented by a logistic model:
+<span class="math inline">\(logit (P(D=1|X))=\alpha+\beta X\)</span>.
+With FFQ-derived exposures, the observed exposure-diseases associations
+would be <span class="math inline">\(logit (P(D=1|X))=\alpha_{obs}+\beta
+_{obs} Z\)</span>.</p>
+<p>For the analysis part,<br />
+1. The uncorrected coefficients <span
+class="math inline">\(\hat{\beta_{obs}}\)</span> and <span
+class="math inline">\(Var (\hat{\beta_{obs}})\)</span> would be obtained
+from the main study<br />
+2. The <span class="math inline">\(\hat{\lambda}\)</span> and <span
+class="math inline">\(Var(\hat{\lambda})\)</span> would be obtained from
+the validation study<br />
+3. We would apply the Linear approximation to correct the <span
+class="math inline">\(\hat{\beta_{obs}}\)</span>: <span
+class="math display">\[
+\hat{\beta_{cor}}=\hat{\beta_{obs}}/\hat{\lambda}\]</span><br />
+4. Variance of corrected coefficients would be obtained by delta method.
+<span class="math display">\[
+Var(\hat{\beta_{cor}})=\frac{1}{\hat{\lambda}^2}Var(\hat{\beta_{obs}})+\frac{\hat{\beta_{obs}}^2}{\hat{\lambda}^4}Var(\hat{\lambda})\]</span></p>
+<p>We would consider several scenarios with different degree of
+measurement error (<span class="math inline">\(\lambda\)</span>),
+prevalence of diseases (CI), as well as strength of associations (odds
+ratio (OR)). For each combination of parameters, we would iterate the
+simulation process 1,000 times to assess the RMSE of the uncorrected and
+corrected <span class="math inline">\(\beta\)</span> estimates and its
+convergency probability of the true <span
+class="math inline">\(\beta\)</span>. We would also assess the direction
+and degree of bias in estimated odds ratio by calculating the percentage
+of bias.</p>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<div id="part-1.-validation-study-on-ffq-derived-dietary-indices."
+class="section level2">
+<h2>PART 1. Validation study on FFQ derived dietary indices.</h2>
+<p>We observed weak correlations between PDI and the other two
+plant-based diet indices (rs=0.20 with hPDI and -0.10 with uPDI. Because
+higher hPDI represented higher dietary quality and higher uPDI
+represented lower dietary quality, the hPDI is inversely associated with
+uPDI as expected (rs=-0.39) . The strength of correlations between
+plant-based diet indices and their scoring components ranges from 0 for
+animal food and PDI to 0.80 for total plants and PDI (<strong>Figure
+3</strong>).</p>
+<p>The FFQ-derived estimates from two assessments taken one year apart
+demonstrated moderate to high reproducibility (ICC_FFQs =0.54 to 0.77)
+that are slightly higher than the reproductivity of two dietary records
+(ICC_DRs=0.50 to 0.68; <strong>Table 2</strong>). Using the average
+estimates of two dietary records as the comparison method, FFQ-derived
+three plant-based diet indices showed relatively high validity (rs=0.47
+to 0.63), whereas FFQ were less valid to estimate their scoring
+components (rs= 0.30 to 0.63; <strong>Table 3</strong>). We also
+visualized the validity results in the <strong>Figure 4</strong> where
+we plotted the estimates from the average of the two dietary records
+against FFQ estimates. Here, we found the calibration coefficients
+(slopes) and R^2 were generally higher for three plant-based diet
+indices than their scoring components, suggesting the FFQ-derived
+plant-based diet indices were more comparable with their true estimates
+from dietary records.</p>
+</div>
+<div
+id="part-2.-simulation-analysis-on-measurement-error-in-ffq-estimates"
+class="section level2">
+<h2>PART 2. Simulation analysis on measurement error in FFQ
+estimates</h2>
+<p>In the simulation procedure,<br />
+* We first assumed a standardized normally distributed true intake <span
+class="math inline">\(X_i~N(0,1)\)</span> within the overall study
+population.<br />
+* Then, we derived the FFQ estimates with systematic and random error
+<span class="math inline">\(Z_i=X_i+E_i+\epsilon_i\)</span> where half
+of the population over-report with <span class="math inline">\(E_i \sim
+N(1,(1-\lambda)/\lambda)\)</span> and the other half of the population
+under-report with <span class="math inline">\(E_i \sim
+N(-1,(1-\lambda)/\lambda )\)</span>. All study participants followed the
+same random error distribution: <span class="math inline">\(\epsilon_i
+\sim N(0,0.001)\)</span>.<br />
+* Next, we simulated the diseases status according to the binominal
+distribution <span
+class="math display">\[P(D=1|X_i)=\frac{\exp(\alpha+\beta
+X_i)}{1+\exp(\alpha+\beta X_i)}\]</span> where <span
+class="math inline">\(\alpha=logit(CI)\)</span> and $beta=log(OR) $ *
+The 500 observations in the validation study were then sampled from the
+main study.</p>
+<p>We developed a user-friendly algorithm to assess the impact of
+measurement errors in dietary exposures on their associations with
+diseases outcome (simu_resul). Using this algorithm, readers can choose
+their own sets of parameters under different conditions.</p>
+<p>In the current analysis, we mainly focused on changes of three
+parameters: the degree of measurement error (<span
+class="math inline">\(\lambda\)</span>= 0.2, 0.4,0.6, and 0.8), the
+prevalence of diseases (CI=0.05, 0.1, 0.3, 0.5), and the strength of
+associations (true OR= 1.2, 1.5, 2, 2.5). According to <strong>Figure
+5</strong> for the percentage of bias of the crude estimates under
+different scenarios, we found measurement errors embedded in the
+exposures tend to attenuate (bias towards the null) the ORs, and this
+bias would be exacerbated with less valid FFQ-derived exposures (smaller
+lambda) and stronger exposure-diseases associations (larger OR).</p>
+<p><strong>Figures 6-8</strong> show the comparison results before and
+after measurement error correction. We observed the corrected beta
+estimates (blue) always have smaller (red) RMSE than the uncorrected
+ones (<strong>Figure 6</strong>). In addition, the coverage probability
+of true value is extremely low for uncorrected estimates, and much
+higher for the corrected estimates(<strong>Figure 7</strong>). This
+might be due to 1) more bias in the uncorrected estimates, and 2) larger
+variance and wider confidence interval for the corrected estimates. We
+also found the bias in ORs decreased after applying measurement error
+correction (<strong>Figure 8</strong>).</p>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>This study highlights that a 152-item, semi-quantitative FFQ is
+appropriate for ranking individuals to evaluate the dietary scores.
+Dietary scores derived from the FFQ showed moderate to high
+reproducibility when comparing estimates one year apart, and validity
+when compared with dietary scores derived from two weighed 7DDRs
+collected over 1 year. However, measurement error in FFQ estimates
+cannot be overlook. In the simulation analysis part, we demonstrated
+that the measurement error in FFQ-derived dietary exposures could
+distort the associations with health outcomes. Furthermore, we found
+applying appropriate measurement error correction methods could
+alleviate the bias. Therefore, in the future nutritional epidemiology
+studies, it is essential to validate the dietary exposures, as well as
+consider conducting measurement error correction analysis to justify
+their main findings.</p>
+<p>Our current study also has some limitations which can be improved.
+First, we did find there are day-to-day random variation in dietary
+records (ICC&lt;1), which would attenuate the validity estimates based
+on spearman correlation between dietary values derived from FFQ and
+dietary records. Hence, we can use Rosner. et al.’s method to account
+for the random variation in dietary records (12). Second,
+generalizability may be limited because our study population were all
+women due to the data availability issue. We can repeat the current
+analysis in Men’s lifestyle validation study to further confirm our
+results. Third, we have only considered single dietary exposure in the
+simulation analysis. However, many dietary variables are correlated
+(e.g., energy intake is positively correlated with macronutrients and
+food intakes) and they could confound each other with diseases
+associations. Therefore, in the real-world analysis, we would usually
+include several dietary variables measured with error in the same model
+and need to use mthod that can correct measurement errors for multiple
+variables at the same time. Rosner. et al.’s have developed a
+multivariate correction method that can handle both the error with which
+each variable is measured and the correlation of errors (13).</p>
+</div>
+<div id="reference" class="section level1">
+<h1>Reference</h1>
+<ol style="list-style-type: decimal">
+<li>Willett W. Nutritional epidemiology: Oxford University Press,
+2012.</li>
+<li>Satija A, Hu FB. Plant-based diets and cardiovascular health. Trends
+Cardiovasc Med 2018;28(7):437-41. doi: 10.1016/j.tcm.2018.02.004.</li>
+<li>Colditz GA, Manson JE, Hankinson SE. The Nurses’ Health Study:
+20-year contribution to the understanding of health among women. J
+Womens Health 1997;6(1):49-62. doi: 10.1089/jwh.1997.6.49.</li>
+<li>Cho E, Chen WY, Hunter DJ, Stampfer MJ, Colditz GA, Hankinson SE,
+Willett WC. Red meat intake and risk of breast cancer among
+premenopausal women. Archives of internal medicine 2006;166(20):2253-9.
+doi: 10.1001/archinte.166.20.2253.</li>
+<li>Koo TK, Li MY. A Guideline of Selecting and Reporting Intraclass
+Correlation Coefficients for Reliability Research. J Chiropr Med
+2016;15(2):155-63. doi: 10.1016/j.jcm.2016.02.012.</li>
+<li>Rosner B, Glynn RJ. Interval estimation for rank correlation
+coefficients based on the probit transformation with extension to
+measurement error correction of correlated ranked data. Statistics in
+medicine 2007;26(3):633-46. doi: 10.1002/sim.2547.</li>
+<li>Perisic I, Rosner B. Comparisons of measures of interclass
+correlations: the general case of unequal group size. Statistics in
+medicine 1999;18(12):1451-66. doi:
+10.1002/(sici)1097-0258(19990630)18:12&lt;1451::aid-sim142&gt;3.0.co;2-k.</li>
+<li>Bingham SA, Gill C, Welch A, Cassidy A, Runswick SA, Oakes S, Lubin
+R, Thurnham DI, Key T, Roe L. Validation of dietary assessment methods
+in the UK arm of EPIC using weighed records, and 24-hour urinary
+nitrogen and potassium and serum vitamin C and carotenoids as
+biomarkers. International journal of epidemiology
+1997;26(suppl_1):S137.</li>
+<li>Rosner B, Spiegelman D, Willett W. Correction of logistic regression
+relative risk estimates and confidence intervals for measurement error:
+the case of multiple covariates measured with error. American journal of
+epidemiology 1990;132(4):734-45.</li>
+<li>Kaaks R, Riboli E, Van Staveren W. Calibration of dietary intake
+measurements in prospective cohort studies. American journal of
+epidemiology 1995;142(5):548-56.</li>
+<li>Rosner B, Willett WC, Spiegelman D. Correction of logistic
+regression relative risk estimates and confidence intervals for
+systematic within-person measurement error. Stat Med 1989;8(9):1051-69;
+discussion 71-3. doi: 10.1002/sim.4780080905.</li>
+<li>Rosner B, Willett WC. Interval estimates for correlation
+coefficients corrected for within-person variation: implications for
+study design and hypothesis testing. Am J Epidemiol 1988;127(2):377-86.
+doi: 10.1093/oxfordjournals.aje.a114811.</li>
+<li>Spiegelman D, McDermott A, Rosner B. Regression calibration method
+for correcting measurement-error bias in nutritional epidemiology. The
+American journal of clinical nutrition 1997;65(4 Suppl):1179S-86S. doi:
+10.1093/ajcn/65.4.1179S. </li>
+</ol>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="appendix" class="section level1">
+<h1>Appendix</h1>
+<div id="tables-and-figures" class="section level2">
+<h2>Tables and Figures</h2>
+<div class="figure">
+<img src="img/fig1.jpg" alt="" />
+<p class="caption">Scoring methods for plant-based diet indices</p>
+</div>
+<p><strong>Figure 1</strong>.Scoring methods for plant-based diet
+indices</p>
+<p><em>+means higher intakes receive higher scores; - means higher
+intakes receive lower scores</em><br />
+<em>1. Healthful plant food group (n=7): whole grains, fruits,
+vegetables, nuts, legumes, vegetable oils, tea &amp; coffee</em><br />
+<em>2. Unhealthful plant food group (n=5): fruit juices , refined
+grains, potatoes, sugar-sweetened beverage, sweets and
+desserts</em><br />
+<em>3. Animal Food Group (n=6): animal fat, dairy, egg, fish or seafood,
+meat (red, processed meat, poultry), miscellaneous animal-based
+foods</em></p>
+<div style="page-break-after: always;"></div>
+<div class="figure">
+<img src="img/fig2.jpg" alt="" />
+<p class="caption">Illustration of simulated main and validation
+study</p>
+</div>
+<p><strong>Figure 2</strong>. Illustration of simulated main and
+validation study</p>
+<div style="page-break-after: always;"></div>
+<div class="figure">
+<img src="final-project_git_files/figure-html/unnamed-chunk-3-1.png" alt="Spearman correlation matrix between plant-based diet indices and their scoring components, using the FFQ2" width="1920" />
+<p class="caption">
+Spearman correlation matrix between plant-based diet indices and their
+scoring components, using the FFQ2
+</p>
+</div>
+<p><strong>Figure 3</strong>. Spearman correlation matrix between
+plant-based diet indices and their scoring components, using the
+FFQ2</p>
+<div style="page-break-after: always;"></div>
+<div class="figure">
+<img src="final-project_git_files/figure-html/figure4-plot-1.png" alt="Scatter plots with calibration coeffients of estimates from the average of the two dietary records against FFQ 2 estimates" width="1920" />
+<p class="caption">
+Scatter plots with calibration coeffients of estimates from the average
+of the two dietary records against FFQ 2 estimates
+</p>
+</div>
+<p><strong>Figure 4</strong>. Scatter plots with calibration coeffients
+of estimates from the average of the two dietary records against FFQ 2
+estimates <em>A: Plots for three plant-based diet indices</em><br />
+<em>B: Plots for scoring components of plant-based diet</em></p>
+<div style="page-break-after: always;"></div>
+<div class="figure">
+<img src="final-project_git_files/figure-html/figure5-plot-1.png" alt="Percentage of bias in estimated OR before correcting for measurement error" width="1920" />
+<p class="caption">
+Percentage of bias in estimated OR before correcting for measurement
+error
+</p>
+</div>
+<p><strong>Figure 5</strong>.Percentage of bias in estimated OR before
+correcting for measurement error </p>
+<div class="figure">
+<img src="final-project_git_files/figure-html/figure6-plot-1.png" alt="RMSE in beta estimates before and after correcting for measurement error" width="1920" />
+<p class="caption">
+RMSE in beta estimates before and after correcting for measurement error
+</p>
+</div>
+<p><strong>Figure 6</strong>.RMSE in beta estimates before and after
+correcting for measurement error</p>
+<div style="page-break-after: always;"></div>
+<div class="figure">
+<img src="final-project_git_files/figure-html/figure7-plot-1.png" alt="Coverage probability of beta estimates before and after correcting for measurement error" width="1920" />
+<p class="caption">
+Coverage probability of beta estimates before and after correcting for
+measurement error
+</p>
+</div>
+<p><strong>Figure 7</strong>.Coverage probability of beta estimates
+before and after correcting for measurement error </p>
+<div class="figure">
+<img src="final-project_git_files/figure-html/figure8-plot-1.png" alt="Percentage of bias in estimated OR before and after correcting for measurement error" width="1920" />
+<p class="caption">
+Percentage of bias in estimated OR before and after correcting for
+measurement error
+</p>
+</div>
+<p><strong>Figure 8</strong>.Percentage of bias in estimated OR before
+and after correcting for measurement error</p>
+<div style="page-break-after: always;"></div>
+<table class="table table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+Table1. Summary statistics of the dietary exposures derived from FFQs
+and dietary records
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+X.
+</th>
+<th style="text-align:left;">
+pdi
+</th>
+<th style="text-align:left;">
+hpdi
+</th>
+<th style="text-align:left;">
+updi
+</th>
+<th style="text-align:left;">
+hplant
+</th>
+<th style="text-align:left;">
+uplant
+</th>
+<th style="text-align:left;">
+tplant
+</th>
+<th style="text-align:left;">
+animal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+(N=742)
+</td>
+<td style="text-align:left;">
+(N=742)
+</td>
+<td style="text-align:left;">
+(N=742)
+</td>
+<td style="text-align:left;">
+(N=742)
+</td>
+<td style="text-align:left;">
+(N=742)
+</td>
+<td style="text-align:left;">
+(N=742)
+</td>
+<td style="text-align:left;">
+(N=742)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FFQ1
+</td>
+<td style="text-align:left;">
+53.0 [6.46]
+</td>
+<td style="text-align:left;">
+54.5 [7.58]
+</td>
+<td style="text-align:left;">
+53.9 [8.04]
+</td>
+<td style="text-align:left;">
+20.5 [5.27]
+</td>
+<td style="text-align:left;">
+14.2 [4.41]
+</td>
+<td style="text-align:left;">
+34.8 [7.13]
+</td>
+<td style="text-align:left;">
+17.8 [4.16]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+  Missing
+</td>
+<td style="text-align:left;">
+17 (2.3%)
+</td>
+<td style="text-align:left;">
+17 (2.3%)
+</td>
+<td style="text-align:left;">
+17 (2.3%)
+</td>
+<td style="text-align:left;">
+17 (2.3%)
+</td>
+<td style="text-align:left;">
+17 (2.3%)
+</td>
+<td style="text-align:left;">
+17 (2.3%)
+</td>
+<td style="text-align:left;">
+17 (2.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FFQ2
+</td>
+<td style="text-align:left;">
+52.8 [6.52]
+</td>
+<td style="text-align:left;">
+54.5 [7.95]
+</td>
+<td style="text-align:left;">
+53.9 [7.97]
+</td>
+<td style="text-align:left;">
+20.5 [5.34]
+</td>
+<td style="text-align:left;">
+14.2 [4.52]
+</td>
+<td style="text-align:left;">
+34.6 [7.34]
+</td>
+<td style="text-align:left;">
+18.2 [4.06]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DR_wk1
+</td>
+<td style="text-align:left;">
+53.5 [6.57]
+</td>
+<td style="text-align:left;">
+55.3 [7.53]
+</td>
+<td style="text-align:left;">
+53.5 [7.95]
+</td>
+<td style="text-align:left;">
+21.0 [5.12]
+</td>
+<td style="text-align:left;">
+14.1 [3.71]
+</td>
+<td style="text-align:left;">
+35.0 [5.92]
+</td>
+<td style="text-align:left;">
+17.6 [3.88]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+  Missing
+</td>
+<td style="text-align:left;">
+4 (0.5%)
+</td>
+<td style="text-align:left;">
+4 (0.5%)
+</td>
+<td style="text-align:left;">
+4 (0.5%)
+</td>
+<td style="text-align:left;">
+4 (0.5%)
+</td>
+<td style="text-align:left;">
+4 (0.5%)
+</td>
+<td style="text-align:left;">
+4 (0.5%)
+</td>
+<td style="text-align:left;">
+4 (0.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DR_wk2
+</td>
+<td style="text-align:left;">
+53.6 [6.40]
+</td>
+<td style="text-align:left;">
+54.4 [7.36]
+</td>
+<td style="text-align:left;">
+53.8 [7.57]
+</td>
+<td style="text-align:left;">
+20.9 [5.00]
+</td>
+<td style="text-align:left;">
+14.6 [3.65]
+</td>
+<td style="text-align:left;">
+35.5 [5.85]
+</td>
+<td style="text-align:left;">
+17.9 [3.63]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+  Missing
+</td>
+<td style="text-align:left;">
+7 (0.9%)
+</td>
+<td style="text-align:left;">
+7 (0.9%)
+</td>
+<td style="text-align:left;">
+7 (0.9%)
+</td>
+<td style="text-align:left;">
+7 (0.9%)
+</td>
+<td style="text-align:left;">
+7 (0.9%)
+</td>
+<td style="text-align:left;">
+7 (0.9%)
+</td>
+<td style="text-align:left;">
+7 (0.9%)
+</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<table class="table table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+Table2. Reproducibility and validity results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+vararible
+</th>
+<th style="text-align:left;">
+ICC_FFQs
+</th>
+<th style="text-align:left;">
+ICC_DRs
+</th>
+<th style="text-align:left;">
+validity_FFQ2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+pdi
+</td>
+<td style="text-align:left;">
+0.69
+</td>
+<td style="text-align:left;">
+0.57
+</td>
+<td style="text-align:left;">
+0.47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hpdi
+</td>
+<td style="text-align:left;">
+0.77
+</td>
+<td style="text-align:left;">
+0.56
+</td>
+<td style="text-align:left;">
+0.63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+updi
+</td>
+<td style="text-align:left;">
+0.73
+</td>
+<td style="text-align:left;">
+0.62
+</td>
+<td style="text-align:left;">
+0.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hplant
+</td>
+<td style="text-align:left;">
+0.76
+</td>
+<td style="text-align:left;">
+0.68
+</td>
+<td style="text-align:left;">
+0.55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+uplant
+</td>
+<td style="text-align:left;">
+0.77
+</td>
+<td style="text-align:left;">
+0.50
+</td>
+<td style="text-align:left;">
+0.48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tplant
+</td>
+<td style="text-align:left;">
+0.76
+</td>
+<td style="text-align:left;">
+0.61
+</td>
+<td style="text-align:left;">
+0.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+animal
+</td>
+<td style="text-align:left;">
+0.54
+</td>
+<td style="text-align:left;">
+0.50
+</td>
+<td style="text-align:left;">
+0.30
+</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="analysis-code" class="section level2">
+<h2>Analysis Code</h2>
+<pre class="r"><code>library(visdat)
+library(heatmaply)
+library(data.table)
+library(data.table)
+library(tidyverse)
+library(haven)
+library(stats)
+library(ggplot2)
+library(ggpmisc)
+library(irr)
+library(table1)
+library(ggplot2)
+library(ggcorrplot)
+library(kableExtra)
+library(gridExtra)
+library(cowplot)
+img_path &lt;- &quot;img&quot;
+data_path&lt;-&quot;data&quot;
+wlvs&lt;-read_sas(&quot;data/wlvs.sas7bdat&quot;)
+var_na&lt;-c(&quot;id&quot;,&quot;pdi&quot;,&quot;updi&quot;,&quot;hpdi&quot;,&quot;hplant&quot;,&quot;uplant&quot;,&quot;animal&quot;,&quot;tplant&quot;)
+wlvs_clean&lt;-
+  wlvs%&gt;%select(starts_with(var_na))
+
+
+#reshaping data 
+var_names &lt;- c(&quot;vararible&quot;,&quot;method&quot;)
+wlvs_reshape&lt;-
+  wlvs_clean%&gt;%pivot_longer(-id)%&gt;%
+  separate(name, var_names, fill = &quot;right&quot;) %&gt;%
+  pivot_wider(names_from=method)%&gt;%
+  rowwise()%&gt;%
+  transmute(
+    id,
+    vararible,
+    FFQ1=ffq1,
+    FFQ2=ffq2,
+    DR_wk1=week1,
+    DR_wk2=week2,
+    DR_avg=mean(c(week1,week2)),
+         vararible=factor(vararible,
+                          levels=list(&quot;pdi&quot;,&quot;hpdi&quot;,&quot;updi&quot;,&quot;hplant&quot;,&quot;uplant&quot;,&quot;tplant&quot;,&quot;animal&quot;)))
+
+var&lt;-c(&quot;FFQ1&quot;,&quot;FFQ2&quot;,&quot;DR_wk1&quot;,&quot;DR_wk2&quot;,&quot;DR_wk2&quot;)
+form&lt;-paste(&quot;~&quot;,paste(var,collapse = &quot;+&quot;),&quot;|vararible&quot;)
+tab1&lt;-as_tibble(table1(as.formula(form),wlvs_reshape, render.continuous=&quot;Mean [SD]&quot;)%&gt;%
+  data.frame()%&gt;%
+  #filter(!grepl(&quot;missing&quot;,X.,ignore.case = T))%&gt;%
+  select(-Overall))
+
+  
+#correlation matrix
+corr_data=
+  wlvs_reshape%&gt;%
+  select(id,vararible,FFQ2)%&gt;%
+  arrange(vararible)%&gt;%
+  pivot_wider(names_from=vararible,values_from = FFQ2)%&gt;%
+  select(-1)
+ corr &lt;-  round(cor(corr_data,method=&quot;spearman&quot;), 2)
+ fig3&lt;-ggcorrplot(corr,
+  outline.color = &quot;white&quot;,
+  ggtheme = ggplot2::theme_gray,
+  colors = c(&quot;#6D9EC1&quot;, &quot;white&quot;, &quot;#E46726&quot;),
+   lab = TRUE)
+
+#calculate the ICC 
+icc_yy&lt;-function(varn){
+  icc_ffq&lt;-wlvs_reshape%&gt;%
+  filter(vararible==varn)%&gt;%
+  select(FFQ1,FFQ2)%&gt;%
+  drop_na()%&gt;%
+  icc(., model = &quot;oneway&quot;,
+    type = &quot;agreement&quot;,
+    unit = &quot;single&quot;)
+  
+  icc_week&lt;-wlvs_reshape%&gt;%
+  filter(vararible==varn)%&gt;%
+  select(DR_wk1,DR_wk2)%&gt;%
+  drop_na()%&gt;%
+  icc(., model = &quot;oneway&quot;,
+    type = &quot;agreement&quot;,
+    unit = &quot;single&quot;)
+data.frame(
+vararible=varn,
+ICC_FFQs=round(icc_ffq$value,2),
+ICC_DRs=round(icc_week$value,2))
+}
+vars&lt;-c(&quot;pdi&quot;,&quot;hpdi&quot;,&quot;updi&quot;,&quot;hplant&quot;,&quot;uplant&quot;,&quot;tplant&quot;,&quot;animal&quot;)
+ICC_final&lt;-NULL
+for (varn in vars){
+ICC_final=rbind(ICC_final,icc_yy(varn))
+}
+
+
+#calculate the validity
+validaity_final&lt;-wlvs_reshape%&gt;%
+  group_by(vararible)%&gt;%
+  #drop_na()%&gt;%
+    summarize(validity_FFQ2=cor(FFQ2, DR_avg,method = &quot;spearman&quot;,use=&quot;complete.obs&quot;))
+tab2&lt;-ICC_final%&gt;%
+  left_join(validaity_final,by=&quot;vararible&quot;)
+##visualize the scatterplot and calibration coeffients
+p1=
+  wlvs_reshape%&gt;%
+  filter(vararible%in%c(&quot;pdi&quot;,&quot;hpdi&quot;,&quot;updi&quot;))%&gt;%
+  ggplot( aes(x =FFQ2 , y = DR_avg)) +
+  stat_poly_line() +
+  stat_poly_eq(aes(label = paste(after_stat(eq.label),
+                                 after_stat(rr.label), sep = &quot;*\&quot;, \&quot;*&quot;))) +
+  geom_point(alpha=0.3)+facet_wrap(~vararible, ncol = 3)+ theme_bw()
+
+p2= wlvs_reshape%&gt;%
+  filter(vararible%in%c(&quot;hplant&quot;,&quot;uplant&quot;,&quot;tplant&quot;,&quot;animal&quot;))%&gt;%
+  ggplot( aes(x =FFQ2 , y = DR_avg)) +
+  stat_poly_line() +
+  stat_poly_eq(aes(label = paste(after_stat(eq.label),
+                                 after_stat(rr.label), sep = &quot;*\&quot;, \&quot;*&quot;))) +
+  geom_point(alpha=0.3)+facet_wrap(~vararible, ncol = 2)+ theme_bw()
+
+fig4&lt;-plot_grid(p1, p2, labels=c(&quot;A&quot;, &quot;B&quot;), ncol = 1, nrow = 2)
+
+# simulation analysis
+simu_result&lt;-function(N_main,N_val,eps,lambda,ci,or){
+B=1000
+a = log(ci/(1-ci))
+b = log(or)
+simu_resul=replicate(B,
+       {  #main study
+  x = rnorm(N_main, 0, 1)
+  e = c(rnorm(N_main/2, 1, (1-lambda)/(lambda)),rnorm(N_main/2, -1, (1-lambda)/(lambda)))
+  #var=(1-lambda)/lambda
+  z = x + e+rnorm(1,0,eps)
+  d = rep(0, N_main)
+
+  for (i in 1:N_main){
+  d[i] = rbinom(n=1, size=1, prob=exp(a+b*x[i])/(1+exp(a+b*x[i])))
+  } 
+  main &lt;- as.data.frame(cbind(x, e, z, d))
+  
+  #validation study
+  xv = sample(x,N_val,replace = F)
+  ev = c(rnorm(N_val/2, 1,(1-lambda)/(lambda)),rnorm(N_val/2, -1, (1-lambda)/(lambda)))
+  zv = xv + ev+rnorm(1,0,eps)
+  # dv = rep(0, 100)
+  # for (i in 1:100){
+  # dv[i] = rbinom(n=1, size=1, prob=exp(a+b*xv[i])/(1+exp(a+b*xv[i])))
+  # } 
+  val &lt;- as.data.frame(cbind(xv, ev, zv))
+  
+  #logistic regression of D on Z
+  mod &lt;- glm(d ~ z, family=binomial(link=&quot;logit&quot;), data = main) 
+  bobs= summary(mod)$coef[2]
+  vbobs = summary(mod)$coef[2,2]^2
+  llo= summary(mod)$coef[2]-1.96*summary(mod)$coef[2,2]
+  ulo = summary(mod)$coef[2]+1.96*summary(mod)$coef[2,2]
+  
+  #linear regression of X on Z
+  modv &lt;- glm(xv ~ zv, family=gaussian(link=&quot;identity&quot;), data = val) 
+  lambdahat = summary(modv)$coef[2]
+  vlambdahat = summary(modv)$coef[2,2]^2
+  
+  #point estimate, variance and CI for corrected beta
+  bcor = bobs/lambdahat
+  vbcor = (1/lambdahat^2)*vbobs + (bobs^2/lambdahat^4)*vlambdahat
+  sebcor = sqrt(vbcor)
+  llc = bcor-1.96*sebcor
+  ulc = bcor +1.96*sebcor
+  data.frame(bobs=bobs,
+            vbobs=vbobs,
+            llo=llo,
+            ulo=ulo,
+           bcor=bcor,
+           vbcor=vbcor,
+           llc=llc,
+         ulc=ulc )},simplify = T)
+
+#aveagre varaince of beta
+mvar_obs=mean(as.numeric(simu_resul[&quot;vbobs&quot;,]))
+mvar_cor=mean(as.numeric(simu_resul[&quot;vbcor&quot;,]))
+#RMSE
+#uncorr
+rmse_obs = sqrt(sum((as.numeric(simu_resul[&quot;bobs&quot;,])-b)^2)/B)
+rmse_cor=sqrt( sum((as.numeric(simu_resul[&quot;bcor&quot;,])-b)^2)/B)
+
+#Percentage bias
+#uncorr
+bobsm = mean(as.numeric(simu_resul[&quot;bobs&quot;,]))
+pbias_obs = (exp(bobsm)/exp(b)-1)*100
+#corr
+bcorm = mean(as.numeric(simu_resul[&quot;bcor&quot;,]))
+pbias_cor = (exp(bcorm)/exp(b)-1)*100
+#convergency pro
+coverage_obs=(sum(as.numeric(simu_resul[&quot;llo&quot;,])&lt;b &amp;as.numeric(simu_resul[&quot;ulo&quot;,])&gt;b)/B)*100
+coverage_cor=(sum(as.numeric(simu_resul[&quot;llc&quot;,])&lt;b &amp;as.numeric(simu_resul[&quot;ulc&quot;,])&gt;b)/B)*100
+
+data.frame(
+          mvar_obs=mvar_obs,
+          mvar_cor=mvar_cor,
+          rmse_obs=rmse_obs,
+           rmse_cor=rmse_cor,
+           pbias_obs=pbias_obs,
+           pbias_cor=pbias_cor,
+           coverage_obs=coverage_obs,
+           coverage_cor=coverage_cor
+           
+           )
+
+}
+grid&lt;-expand.grid(N_main=5000,N_val=500,
+                  lambda=seq(0.2,0.8,0.2),eps=0.001,
+                  ci=c(0.05, 0.1, 0.3, 0.5),or=c(1.2,1.5, 2,2.5))
+re&lt;-pmap(grid,simu_result)
+results&lt;-bind_rows(re, .id = &quot;label&quot;)
+final_out&lt;-grid%&gt;%
+  mutate(label=as.character(row_number()))%&gt;%
+  left_join(results,by=&quot;label&quot;)
+
+final_reshape&lt;-
+  final_out%&gt;%
+  pivot_longer(rmse_obs:coverage_cor)%&gt;%
+  separate(name, var_names, fill = &quot;right&quot;) %&gt;%
+  pivot_wider(names_from=vararible)%&gt;%
+  mutate(ci=factor(ci,levels=list(0.05,0.1, 0.3, 0.5),
+                   labels=list(&quot;CI=0.05&quot;,&quot;CI=0.1&quot;,&quot;CI=0.3&quot;,&quot;CI=0.5&quot;)),
+         method=factor(method),
+         or=factor(or),
+         lambda=factor(lambda)
+         )
+
+fig5&lt;-
+  final_reshape%&gt;%
+  filter(method==&quot;obs&quot;)%&gt;%
+  ggplot(aes(x=lambda,y=pbias,color=or))+
+  geom_point()+
+  geom_hline(yintercept=0,color=&quot;black&quot;)+
+  scale_y_continuous(name=&quot;Percentage of bias in estimated OR,%&quot;,limits=c(-60,0))+
+  facet_wrap(~ci)
+
+
+
+fig6&lt;-
+  final_reshape%&gt;%
+  mutate( or=ordered(or,levels = c(1.2,1.5, 2,2.5),
+                     labels=c(&quot;true OR=1.2&quot;,&quot;true OR=1.5&quot;,&quot;true OR=2&quot;,&quot;true OR=2.5&quot;)),
+         )%&gt;%
+  ggplot(aes(x=lambda,y=rmse,color=method,shape=method))+
+  geom_point()+
+  scale_y_continuous(name=&quot;RMSE in beta estimates&quot;)+
+  facet_wrap(or~ci)
+
+
+fig7&lt;-final_reshape%&gt;%
+    mutate( or=ordered(or,levels = c(1.2,1.5, 2,2.5),
+                       labels=c(&quot;true OR=1.2&quot;,&quot;true OR=1.5&quot;,&quot;true OR=2&quot;,&quot;true OR=2.5&quot;)),
+         )%&gt;%
+  ggplot(aes(x=lambda,y=coverage))+
+  geom_point(aes(color=method,shape=method))+
+  geom_hline(yintercept=0,color=&quot;black&quot;)+
+  scale_y_continuous(name=&quot;Coverage probability of beta estimates,%&quot;)+
+  facet_wrap(or~ci)
+
+fig8&lt;-final_reshape%&gt;%
+  mutate( or=ordered(or,levels = c(1.2,1.5, 2,2.5),
+                     labels=c(&quot;true OR=1.2&quot;,&quot;true OR=1.5&quot;,&quot;true OR=2&quot;,&quot;true OR=2.5&quot;)),
+         )%&gt;%
+  ggplot(aes(x=lambda,y=pbias))+
+  geom_point(aes(color=method,shape=method))+
+  geom_hline(yintercept=0,color=&quot;black&quot;)+
+  scale_y_continuous(name=&quot;Percentage of bias in estimated OR,%&quot;,limits=c(-60,60))+
+  facet_wrap(or~ci)</code></pre>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

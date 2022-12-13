@@ -1,9 +1,29 @@
 name: "yiyang's website"
 output_dir: "."
+type: inverse
 navbar:
-  title: "Yiyang's website for BST 260 final project"
+  title: "Yiyang's website"
   left:
     - text: "Home"
+      icon: fa-home
       href: index.html
-    - text: "Des"
+    - text: "Text report"
       href: tabs/text.html
+    - text: "References"
+      href: tabs/refer.html
+    - text: "Tables and Figures"
+      href: tabs/tab_fig.html
+    - text: "Analysis codes"
+      href: tabs/code.html
+  right:  
+    - text: "Contact me"
+      icon: fa-envelope-o
+      href: mailto:yyue@hsph.harvard.edu
+    - text: "GitHub"
+      icon: fa-envelope-o
+      href: https://github.com/yyy1229
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    
