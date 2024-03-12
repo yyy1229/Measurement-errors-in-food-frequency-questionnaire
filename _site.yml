@@ -1,13 +1,13 @@
-name: "yiyang's website"
+name: "yiyang's measurement error correction"
 output_dir: "."
 type: inverse
 navbar:
-  title: "Yiyang's website"
+  title: "Measurement errors in dietary assessment"
   left:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Text report"
+    - text: "Text Summaries"
       href: tabs/text.html
     - text: "References"
       href: tabs/refer.html

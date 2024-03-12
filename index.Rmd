@@ -1,5 +1,11 @@
 ---
-title: "BST 260's final project"
+title: "Assess measurement errors in food frequency questionnaires (FFQ) derived estimates"
 ---
 
-This is yiyang's final project on meaurement errors in FFQ estimates
+
+In this project, we first evaluated the reproducibility and validity of
+a FFQ in measuring dietary scores. 
+
+We also conducted a simulation analysis to assess the effect of
+measurement error in FFQ estimates on diseases risk estimation and
+applied the linear approximation to correct the measurement errors 
